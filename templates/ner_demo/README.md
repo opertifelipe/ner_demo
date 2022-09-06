@@ -18,13 +18,13 @@ Commands are only re-run if their inputs have changed.
 
 | Command | Description |
 | --- | --- |
-| `install-requirements` | Download a spaCy model with pretrained vectors |
+| `install-requirements` | Install requirements |
 | `assets-fetch` | Download assets from GitHub |
 | `convert` | Convert the data to spaCy's binary format |
-| `create-config-cpu` | Create a new config with an NER pipeline component |
-| `create-config-gpu` | Create a new config with an NER pipeline component |
-| `train-cpu` | Train the NER model |
-| `train-gpu` | Train the NER model with vectors |
+| `create-config-cpu` | Create a new config with an NER pipeline component for cpu |
+| `create-config-gpu` | Create a new config with an NER pipeline component for gpu |
+| `train-cpu` | Train the NER model with CPU |
+| `train-gpu` | Train the NER model with gpu |
 | `evaluate` | Evaluate the model and export metrics |
 | `package` | Package the trained model as a pip package |
 | `visualize-model` | Visualize the model's output interactively using Streamlit |

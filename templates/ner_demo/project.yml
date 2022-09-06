@@ -66,7 +66,7 @@ workflows:
 # shown when executing "spacy project run [optional command] [path] --help".
 commands:
   - name: "install-requirements"
-    help: "Download a spaCy model with pretrained vectors"
+    help: "Install requirements"
     script:
       - "python -m spacy download ${vars.vectors_model}"
 
@@ -74,7 +74,6 @@ commands:
     help: "Download assets from GitHub"
     script:
       - "python -m spacy project assets"
-
 
   - name: "convert"
     help: "Convert the data to spaCy's binary format"
@@ -90,21 +89,21 @@ commands:
       - "corpus/dev.spacy"
 
   - name: "create-config-cpu"
-    help: "Create a new config with an NER pipeline component"
+    help: "Create a new config with an NER pipeline component for cpu"
     script:
       - "python -m spacy init config configs/config.cfg --lang ${vars.lang} --pipeline ner  --optimize 'accuracy' --force"
     outputs:
       - "configs/config.cfg"
 
   - name: "create-config-gpu"
-    help: "Create a new config with an NER pipeline component"
+    help: "Create a new config with an NER pipeline component for gpu"
     script:
       - "python -m spacy init config configs/config.cfg --lang ${vars.lang} --pipeline ner --optimize 'accuracy' --gpu --force"
     outputs:
       - "configs/config.cfg"
 
   - name: "train-cpu"
-    help: "Train the NER model"
+    help: "Train the NER model with CPU"
     script:
       - "python -m spacy train configs/config.cfg --output training/ --paths.train corpus/train.spacy --paths.dev corpus/dev.spacy --initialize.vectors ${vars.vectors_model}"
     deps:
@@ -115,7 +114,7 @@ commands:
       - "training/model-best"
 
   - name: "train-gpu"
-    help: "Train the NER model with vectors"
+    help: "Train the NER model with gpu"
     script:
       - "python -m spacy train configs/config.cfg --output training/ --paths.train corpus/train.spacy --paths.dev corpus/dev.spacy --gpu-id ${vars.gpu_id}"
     deps:
@@ -145,7 +144,7 @@ commands:
       - "packages/${vars.lang}_${vars.name}-${vars.version}/dist/${vars.lang}_${vars.name}-${vars.version}.tar.gz"
 
   - name: visualize-model
-    help: Visualize the model's output interactively using Streamlit
+    help: "Visualize the model's output interactively using Streamlit"
     script:
       - "streamlit run scripts/visualize_model.py training/model-best \"I saw Shaka Khan in London.\"link"
     deps:
