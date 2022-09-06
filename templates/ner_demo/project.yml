@@ -11,6 +11,9 @@ vars:
   gpu_id: 0
   # Vectors model for train-with-vectors
   vectors_model: "en_core_web_lg"
+  # API settings
+  host: "127.0.0.1"
+  port: 5000  
 
 # These are the directories that the project needs. The project CLI will make
 # sure that they always exist.
@@ -31,13 +34,15 @@ assets:
 # haven't changed, it won't be re-run.
 workflows:
   initilize:
-    - download
+    - install-requirements
+    - assets-fetch
 
   training-cpu:
     - convert
     - create-config-cpu
     - train-cpu
     - evaluate
+
   training-gpu:
     - convert
     - create-config-gpu
@@ -47,15 +52,26 @@ workflows:
   visualize:
     - visualize-model
 
+  deploy:
+    - package
+    - install-package
+    - serve
+
 # Project commands, specified in a style similar to CI config files (e.g. Azure
 # pipelines). The name is the command name that lets you trigger the command
 # via "spacy project run [command] [path]". The help message is optional and
 # shown when executing "spacy project run [optional command] [path] --help".
 commands:
-  - name: "download"
+  - name: "install-requirements"
     help: "Download a spaCy model with pretrained vectors"
     script:
       - "python -m spacy download ${vars.vectors_model}"
+
+  - name: "assets-fetch"
+    help: "Download assets from GitHub"
+    script:
+      - "python -m spacy project assets"
+
 
   - name: "convert"
     help: "Convert the data to spaCy's binary format"
@@ -128,7 +144,20 @@ commands:
   - name: visualize-model
     help: Visualize the model's output interactively using Streamlit
     script:
-      - "streamlit run scripts/visualize_model.py training/model-best \"I saw Shaka Khan in London.\""
+      - "streamlit run scripts/visualize_model.py training/model-best \"I saw Shaka Khan in London.\"link"
     deps:
       - "scripts/visualize_model.py"
       - "training/model-best"
+
+  - name: install-package
+    help: "Install package"
+    script:
+      - "pip install --force-reinstall packages/en_ner_demo-0.0.0/dist/${vars.lang}_${vars.name}-${vars.version}.tar.gz"      
+
+  - name: "serve"
+    help: "Serve the models via a FastAPI REST API using the given host and port"
+    script:
+      - "uvicorn scripts.serve:app --reload --host ${vars.host} --port ${vars.port}"
+    deps:
+      - "scripts/serve.py"
+    no_skip: true
