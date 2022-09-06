@@ -27,7 +27,7 @@ assets:
       repo: 'https://github.com/opertifelipe/spacy-templates.git'
       branch: 'main'
       path: 'data/ner_data'  
-    description: "Demo training data converted from the v2 `train_ner.py` example with `srsly.write_json(\"train.json\", TRAIN_DATA)`"
+    description: "Demo training data"
 
 # Workflows are sequences of commands (see below) executed in order. You can
 # run them via "spacy project run [workflow]". If a commands's inputs/outputs

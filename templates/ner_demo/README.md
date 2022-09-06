@@ -56,6 +56,6 @@ in the project directory.
 
 | File | Source | Description |
 | --- | --- | --- |
-| `assets` | Git | Demo training data converted from the v2 `train_ner.py` example with `srsly.write_json("train.json", TRAIN_DATA)` |
+| `assets` | Git | Demo training data |
 
 <!-- SPACY PROJECT: AUTO-GENERATED DOCS END (do not remove) -->
