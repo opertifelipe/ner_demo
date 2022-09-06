@@ -2,3 +2,4 @@
 **/corpus
 **/training
 **/packages
+templates/**/*.json
