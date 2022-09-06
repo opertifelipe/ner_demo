@@ -18,14 +18,19 @@ Commands are only re-run if their inputs have changed.
 
 | Command | Description |
 | --- | --- |
-| `download` | Download a spaCy model with pretrained vectors |
+| `install-requirements` | Download a spaCy model with pretrained vectors |
+| `assets-fetch` | Download assets from GitHub |
 | `convert` | Convert the data to spaCy's binary format |
-| `create-config` | Create a new config with an NER pipeline component |
-| `train` | Train the NER model |
-| `train-with-vectors` | Train the NER model with vectors |
+| `create-config-cpu` | Create a new config with an NER pipeline component |
+| `create-config-gpu` | Create a new config with an NER pipeline component |
+| `train-cpu` | Train the NER model |
+| `train-gpu` | Train the NER model with vectors |
 | `evaluate` | Evaluate the model and export metrics |
 | `package` | Package the trained model as a pip package |
 | `visualize-model` | Visualize the model's output interactively using Streamlit |
+| `install-package` | Install package |
+| `documentation-gen` | Generate documentation |
+| `serve` | Serve the models via a FastAPI REST API using the given host and port |
 
 ### ⏭ Workflows
 
@@ -36,7 +41,12 @@ inputs have changed.
 
 | Workflow | Steps |
 | --- | --- |
-| `all` | `convert` &rarr; `create-config` &rarr; `train` &rarr; `evaluate` |
+| `initilize` | `install-requirements` &rarr; `assets-fetch` |
+| `training-cpu` | `convert` &rarr; `create-config-cpu` &rarr; `train-cpu` &rarr; `evaluate` |
+| `training-gpu` | `convert` &rarr; `create-config-gpu` &rarr; `train-gpu` &rarr; `evaluate` |
+| `visualize` | `visualize-model` |
+| `deploy` | `package` &rarr; `install-package` &rarr; `serve` |
+| `generate-documentation` | `documentation-gen` |
 
 ### 🗂 Assets
 
@@ -46,7 +56,6 @@ in the project directory.
 
 | File | Source | Description |
 | --- | --- | --- |
-| [`assets/train.json`](assets/train.json) | Local | Demo training data converted from the v2 `train_ner.py` example with `srsly.write_json("train.json", TRAIN_DATA)` |
-| [`assets/dev.json`](assets/dev.json) | Local | Demo development data |
+| `assets` | Git | Demo training data converted from the v2 `train_ner.py` example with `srsly.write_json("train.json", TRAIN_DATA)` |
 
 <!-- SPACY PROJECT: AUTO-GENERATED DOCS END (do not remove) -->

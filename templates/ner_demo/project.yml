@@ -57,6 +57,9 @@ workflows:
     - install-package
     - serve
 
+  generate-documentation:
+    - documentation-gen
+
 # Project commands, specified in a style similar to CI config files (e.g. Azure
 # pipelines). The name is the command name that lets you trigger the command
 # via "spacy project run [command] [path]". The help message is optional and
@@ -153,6 +156,11 @@ commands:
     help: "Install package"
     script:
       - "pip install --force-reinstall packages/en_ner_demo-0.0.0/dist/${vars.lang}_${vars.name}-${vars.version}.tar.gz"      
+
+  - name: documentation-gen
+    help: "Generate documentation"
+    script:
+      - "python -m spacy project document --output README.md"
 
   - name: "serve"
     help: "Serve the models via a FastAPI REST API using the given host and port"
