@@ -80,6 +80,7 @@ spacy==3.4.1
 spacy-legacy==3.0.10
 spacy-loggers==1.0.3
 spacy-streamlit==1.0.4
+spacy-transformers
 srsly==2.4.4
 starlette==0.13.6
 streamlit==1.12.2
