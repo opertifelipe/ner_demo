@@ -39,6 +39,6 @@ spacy project run deploy
 
 ## API test
 ```
-curl http://127.0.0.1:5000/
-curl -X POST http://127.0.0.1:5000/process/entities --data '{"text":"I like London and Berlin."}'
+curl -X GET -H 'Content-Type: application/json' http://127.0.0.1:5000/
+curl -X POST http://127.0.0.1:5000/process/entities  -H 'Content-Type: application/json' --data '{"text":"I like London and Berlin."}'
 ```
