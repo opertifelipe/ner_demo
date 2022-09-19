@@ -13,7 +13,7 @@ pip install -U 'spacy[cuda113]'
 
 Clone the template:
 ```
-spacy projects clone template/{TEMPLATE_NAME} --repo https://github.com/opertifelipe/spacy-templates.git
+spacy project clone templates/ner_demo --repo https://github.com/opertifelipe/spacy-templates.git
 ```
 
 # NER DEMO
